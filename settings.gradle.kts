@@ -23,3 +23,5 @@ rootProject.name = "Code Challenge"
 include(":app")
 include(":feature:home")
 include(":core:network")
+include(":feature:favourites")
+include(":feature:details")

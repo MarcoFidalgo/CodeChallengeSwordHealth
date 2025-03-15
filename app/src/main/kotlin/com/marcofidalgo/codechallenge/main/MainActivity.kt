@@ -1,14 +1,15 @@
 package com.marcofidalgo.codechallenge.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import com.marcofidalgo.feature.home.ui.HomeActivity
+import androidx.activity.compose.setContent
+import com.marcofidalgo.feature.home.ui.screens.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, HomeActivity::class.java))
-        finish()
+        setContent {
+            HomeScreen()
+        }
     }
 }

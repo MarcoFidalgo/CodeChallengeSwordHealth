@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.marcofidalgo.feature.home"
+    namespace = "com.marcofidalgo.details"
     compileSdk = 35
 
     buildFeatures {

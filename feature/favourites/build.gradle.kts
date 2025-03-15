@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.marcofidalgo.feature.home"
+    namespace = "com.marcofidalgo.favourites"
     compileSdk = 35
 
     buildFeatures {
@@ -18,12 +18,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
