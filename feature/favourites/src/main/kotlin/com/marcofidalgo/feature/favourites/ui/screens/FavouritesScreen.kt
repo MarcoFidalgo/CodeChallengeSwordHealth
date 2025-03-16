@@ -16,8 +16,7 @@ fun FavouritesScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewFavouritesScreen() {
-    MaterialTheme()
-    {
+    MaterialTheme() {
         FavouritesScreen()
     }
 }

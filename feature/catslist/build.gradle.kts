@@ -2,11 +2,10 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.marcofidalgo.feature.home"
+    namespace = "com.marcofidalgo.catslist"
     compileSdk = 35
 
     buildFeatures {
@@ -19,12 +18,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
@@ -34,9 +35,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(project(":feature:favourites"))
-    implementation(project(":feature:catslist"))
 }

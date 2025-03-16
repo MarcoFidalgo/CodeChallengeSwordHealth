@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -66,10 +67,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(project(":feature:home"))
+    implementation(project(":feature:favourites"))
 
     implementation(libs.bundles.retrofit)
 
     implementation("com.squareup.moshi:moshi:1.15.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 }

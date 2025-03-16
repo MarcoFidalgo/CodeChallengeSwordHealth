@@ -1,2 +1,4 @@
 <resources>
+    <string name="bottom_tab_title_cats_list">Cats List</string>
+    <string name="bottom_tab_title_favourites">Favourites</string>
 </resources>
