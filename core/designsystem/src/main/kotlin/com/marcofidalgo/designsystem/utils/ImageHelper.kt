@@ -1,4 +1,4 @@
-package com.marcofidalgo.feature.catslist.ui.screens.utils
+package com.marcofidalgo.designsystem.utils
 
 import com.marcofidalgo.network.api.Constants.URL_CAT_IMAGE
 

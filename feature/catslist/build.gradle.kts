@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.bundles.glide)
 
     implementation(project(":core:network"))
+    implementation(project(":core:designsystem"))
 
     implementation(libs.room)
     implementation(libs.room.ktx)

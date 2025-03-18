@@ -43,9 +43,9 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.marcofidalgo.catslist.R
+import com.marcofidalgo.designsystem.R
+import com.marcofidalgo.designsystem.utils.ImageHelper
 import com.marcofidalgo.feature.catslist.data.remote.CatBreed
-import com.marcofidalgo.feature.catslist.ui.screens.utils.ImageHelper
 import com.marcofidalgo.feature.catslist.viewmodel.CatBreedsViewModel
 
 @Composable
