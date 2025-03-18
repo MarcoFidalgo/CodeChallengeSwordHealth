@@ -45,6 +45,11 @@ dependencies {
     implementation(libs.moshi)
     ksp(libs.moshi.codegen)
 
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.glide)
+
+    implementation(project(":core:network"))
+
     implementation(libs.room)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

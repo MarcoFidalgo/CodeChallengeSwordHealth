@@ -10,6 +10,7 @@ lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.04.01"
 retrofit = "2.9.0"
+retrofit-logging-interceptor = "4.12.0"
 material3Version = "1.3.1"
 kotlinBom = "1.8.0"
 appcompat = "1.7.0"
@@ -20,6 +21,11 @@ hilt = "2.51.1"
 hilt-navigation-compose = "1.2.0"
 moshi = "1.14.0"
 room = "2.5.2"
+glide = "4.16.0"
+glideCompose = "1.0.0-beta01"
+okhttp3Integration = "4.13.0"
+media3CommonKtx = "1.5.1"
+material = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +48,7 @@ androidx-foundation-android = { group = "androidx.compose.foundation", name = "f
 ## Retrofit + Moshi
 retrofit-converter-json = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "retrofit-logging-interceptor" }
 moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 
@@ -62,6 +69,14 @@ room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
+## Glide
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glideCompose" }
+glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "glide" }
+okhttp3-integration = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "okhttp3Integration" }
+androidx-media3-common-ktx = { group = "androidx.media3", name = "media3-common-ktx", version.ref = "media3CommonKtx" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -76,4 +91,11 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 retrofit = [
     "retrofit-core",
     "retrofit-converter-json",
+    "retrofit-logging-interceptor"
+]
+glide = [
+    "glide",
+    "glide-compose",
+    "glide-ksp",
+    "okhttp3-integration"
 ]

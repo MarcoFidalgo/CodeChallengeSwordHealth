@@ -11,6 +11,7 @@ android {
     namespace = "com.marcofidalgo.codechallenge"
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     compileSdk = 35
@@ -50,6 +51,10 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    ksp {
+        arg("room.schemaLocation", project.layout.projectDirectory.dir("schemas").asFile.absolutePath)
     }
 }
 

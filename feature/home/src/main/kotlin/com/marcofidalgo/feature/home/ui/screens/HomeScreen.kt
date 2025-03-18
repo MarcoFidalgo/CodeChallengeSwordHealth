@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import android.util.Log
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -72,12 +73,16 @@ fun HomeScreenContent(
             navController = parentNavController,
             startDestination = BottomTab.CatsList(stringResource(R.string.bottom_tab_title_cats_list))
         ) {
-            composable<BottomTab.CatsList> { CatsListScreen() }
+            composable<BottomTab.CatsList> { CatsListScreen(onCatClick = {navigateToCatDetails()}) }
             composable<BottomTab.Favourites> { FavouritesScreen() }
         }
     }
 }
 
+fun navigateToCatDetails() {
+    Log.d("CATS_::","Navigate to Details")
+    // TODO open cat details screen
+}
 
 @Preview(showBackground = true)
 @Composable
