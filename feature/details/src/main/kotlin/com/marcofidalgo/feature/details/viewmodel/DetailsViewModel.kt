@@ -1,4 +1,4 @@
-package com.marcofidalgo.feature.home.viewmodel
+package com.marcofidalgo.feature.details.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.marcofidalgo.feature.catslist.data.remote.CatBreed

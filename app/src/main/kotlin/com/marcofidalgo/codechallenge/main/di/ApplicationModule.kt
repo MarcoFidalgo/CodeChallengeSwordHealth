@@ -1,6 +1,5 @@
 package com.marcofidalgo.codechallenge.main.di
 
-//import com.marcofidalgo.feature.catslist.data.local.MyRoomDatabase
 import com.marcofidalgo.codechallenge.BuildConfig
 import com.marcofidalgo.codechallenge.main.Constants
 import com.marcofidalgo.feature.catslist.data.remote.BreedsApiService
@@ -23,21 +22,6 @@ import javax.net.ssl.X509TrustManager
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
-
-//    @Provides
-//    @Singleton
-//    fun myRoomDatabase(application: Application): MyRoomDatabase {
-//        return Room.databaseBuilder(
-//            application,
-//            MyRoomDatabase::class.java,
-//            Constants.DB_NAME
-//        ).build()
-//    }
-
-//    @Provides
-//    fun catBreedsDao(database: MyRoomDatabase): CatBreedsDao {
-//        return database.catBreedsDao
-//    }
 
     @Provides
     @Singleton

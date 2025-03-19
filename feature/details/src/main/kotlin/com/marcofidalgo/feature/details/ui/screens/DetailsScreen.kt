@@ -42,7 +42,7 @@ import com.bumptech.glide.request.target.Target
 import com.marcofidalgo.designsystem.R
 import com.marcofidalgo.designsystem.utils.ImageHelper
 import com.marcofidalgo.feature.details.ui.screens.components.InfoContainer
-import com.marcofidalgo.feature.home.viewmodel.DetailsViewModel
+import com.marcofidalgo.feature.details.viewmodel.DetailsViewModel
 import com.marcofidalgo.details.R as LR
 
 @Composable

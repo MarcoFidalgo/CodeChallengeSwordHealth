@@ -25,7 +25,7 @@ import com.marcofidalgo.feature.home.navigation.ScreensNavigator
 import com.marcofidalgo.feature.home.ui.components.BottomTab
 import com.marcofidalgo.feature.home.ui.components.BottomTabsBar
 import com.marcofidalgo.feature.home.ui.components.DetailsRoute
-import com.marcofidalgo.feature.home.viewmodel.DetailsViewModel
+import com.marcofidalgo.feature.details.viewmodel.DetailsViewModel
 import com.marcofidalgo.feature.home.viewmodel.HomeViewModel
 
 @Composable
