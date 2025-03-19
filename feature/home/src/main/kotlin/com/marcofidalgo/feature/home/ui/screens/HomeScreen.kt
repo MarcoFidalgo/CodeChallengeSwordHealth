@@ -13,19 +13,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import android.util.Log
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.marcofidalgo.feature.catslist.ui.screens.CatsListScreen
+import com.marcofidalgo.feature.details.ui.screens.DetailsScreen
 import com.marcofidalgo.feature.favourites.ui.screens.FavouritesScreen
 import com.marcofidalgo.feature.home.R
 import com.marcofidalgo.feature.home.navigation.ScreensNavigator
 import com.marcofidalgo.feature.home.ui.components.BottomTab
 import com.marcofidalgo.feature.home.ui.components.BottomTabsBar
+import com.marcofidalgo.feature.home.ui.components.DetailsRoute
+import com.marcofidalgo.feature.home.viewmodel.DetailsViewModel
+import com.marcofidalgo.feature.home.viewmodel.HomeViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel = hiltViewModel()
+) {
 
     val screensNavigator = remember() {
         ScreensNavigator()
@@ -43,7 +49,7 @@ fun HomeScreen() {
                     ),
                     currentBottomTab = currentBottomTab.value,
                     onTabClicked = { bottomTab ->
-                        screensNavigator.toTab(bottomTab)
+                        screensNavigator.toRoute(bottomTab)
                     }
                 )
             }
@@ -64,6 +70,8 @@ fun HomeScreenContent(
     val parentNavController = rememberNavController()
     screensNavigator.setParentNavController(parentNavController)
 
+    val detailsViewModel = DetailsViewModel()
+
     Surface(
         modifier = Modifier
             .padding(padding)
@@ -73,15 +81,19 @@ fun HomeScreenContent(
             navController = parentNavController,
             startDestination = BottomTab.CatsList(stringResource(R.string.bottom_tab_title_cats_list))
         ) {
-            composable<BottomTab.CatsList> { CatsListScreen(onCatClick = {navigateToCatDetails()}) }
+            composable<BottomTab.CatsList> {
+                CatsListScreen(onCatClick = {
+                    it?.let {
+                        detailsViewModel.updateSelectedBreed(it)
+                        parentNavController.navigate(DetailsRoute)
+                        screensNavigator.toRoute(DetailsRoute)
+                    }
+                })
+            }
             composable<BottomTab.Favourites> { FavouritesScreen() }
+            composable<DetailsRoute> { DetailsScreen(detailsViewModel) }
         }
     }
-}
-
-fun navigateToCatDetails() {
-    Log.d("CATS_::","Navigate to Details")
-    // TODO open cat details screen
 }
 
 @Preview(showBackground = true)

@@ -2,7 +2,9 @@ package com.marcofidalgo.feature.catslist.data.remote
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
+@Serializable
 @JsonClass(generateAdapter = true)
 data class CatBreed(
     @Json(name = "adaptability") val adaptability: Int?,
@@ -46,6 +48,7 @@ data class CatBreed(
     @Json(name = "wikipedia_url") val wikipedia_url: String?
 )
 
+@Serializable
 data class Weight(
     @Json(name = "imperial") val imperial: String?,
     @Json(name = "metric") val metric: String?

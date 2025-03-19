@@ -10,8 +10,8 @@ class ScreensNavigator {
 
     val currentBottomTab = MutableStateFlow<BottomTab?>(null)
 
-    fun toTab(bottomTab: Any) {
-        parentNavController.navigate(bottomTab)
+    fun toRoute(screenRoute: Any) {
+        parentNavController.navigate(screenRoute)
     }
 
     fun setParentNavController(navController: NavHostController) {

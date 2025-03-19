@@ -1,2 +1,5 @@
 <resources>
+    <string name="label_origin">Origin</string>
+    <string name="label_temperament">Temperament</string>
+    <string name="label_description">Description</string>
 </resources>

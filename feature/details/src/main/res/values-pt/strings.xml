@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="label_origin">Origem</string>
+    <string name="label_temperament">Temperamento</string>
+    <string name="label_description">Descrição</string>
+</resources>

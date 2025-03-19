@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -44,6 +45,7 @@ dependencies {
     // Json
     implementation(libs.moshi)
     ksp(libs.moshi.codegen)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.bundles.retrofit)
     implementation(libs.bundles.glide)

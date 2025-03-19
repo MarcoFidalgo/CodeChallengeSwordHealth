@@ -44,4 +44,5 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(project(":feature:favourites"))
     implementation(project(":feature:catslist"))
+    implementation(project(":feature:details"))
 }

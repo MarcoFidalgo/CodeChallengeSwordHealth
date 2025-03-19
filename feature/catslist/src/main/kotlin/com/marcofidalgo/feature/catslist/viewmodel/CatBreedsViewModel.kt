@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.marcofidalgo.feature.catslist.data.CatBreedsRepository
 import com.marcofidalgo.feature.catslist.data.remote.CatBreed
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,6 +27,8 @@ class CatBreedsViewModel @Inject constructor(
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage
 
+    private var debounceJob: Job? = null
+
     init {
         getCatBreeds()
     }
@@ -38,6 +42,29 @@ class CatBreedsViewModel @Inject constructor(
             } catch (e: Exception) {
                 Log.e("ERROR", "getCatBreeds: ${e.message}")
             }
+        }
+    }
+
+    private fun searchCatBreed(breedName: String) {
+        if (breedName.isEmpty()) {
+            getCatBreeds()
+        } else {
+            viewModelScope.launch {
+                try {
+                    _catBreeds.value = catBreedsRepository.searchCatBreed(breedName)
+                    _isLoading.value = false
+                } catch (e: Exception) {
+                    Log.e("ERROR", "getCatBreeds: ${e.message}")
+                }
+            }
+        }
+    }
+
+    fun searchCatBreedDebounced(breedName: String) {
+        debounceJob?.cancel()
+        debounceJob = viewModelScope.launch {
+            delay(700)
+            searchCatBreed(breedName)
         }
     }
 }

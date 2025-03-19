@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,14 +24,21 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,11 +56,12 @@ import com.marcofidalgo.designsystem.R
 import com.marcofidalgo.designsystem.utils.ImageHelper
 import com.marcofidalgo.feature.catslist.data.remote.CatBreed
 import com.marcofidalgo.feature.catslist.viewmodel.CatBreedsViewModel
+import com.marcofidalgo.catslist.R as LR
 
 @Composable
 fun CatsListScreen(
     viewModel: CatBreedsViewModel = hiltViewModel(),
-    onCatClick: () -> Unit
+    onCatClick: (CatBreed?) -> Unit
 ) {
 
     val catBreedsState = viewModel.catBreeds.collectAsState(initial = listOf())
@@ -61,18 +71,18 @@ fun CatsListScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(horizontal = 16.dp, vertical = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Header()
-        SearchBar()
+        BreedSearchBar()
         when {
             isLoading -> LoadingIndicator()
             errorMessage != null -> ErrorMessage(errorMessage!!)
             else -> CatsGrid(catBreedsState.value, onCatClick)
         }
     }
-
 }
 
 @Composable
@@ -86,13 +96,32 @@ fun Header() {
 }
 
 @Composable
-fun SearchBar(modifier: Modifier = Modifier) {
-    //TODO
+fun BreedSearchBar() {
+    val viewModel = hiltViewModel<CatBreedsViewModel>()
+    Column(modifier = Modifier.padding(10.dp)) {
+        var input by remember { mutableStateOf("") }
+        TextField(
+            value = input,
+            readOnly = false,
+            onValueChange = { query ->
+                input = query
+                viewModel.searchCatBreedDebounced(query)
+            },
+            label = { Text(stringResource(LR.string.search_label)) },
+            modifier = Modifier
+                .pointerInput(Unit) {
+                    awaitEachGesture {
+                        awaitFirstDown(pass = PointerEventPass.Initial)
+                    }
+                }
+                .padding(vertical = 32.dp)
+        )
+    }
 }
 
 @Composable
 fun CatsGrid(
-    catBreeds: List<CatBreed>, onCatClick: () -> Unit
+    catBreeds: List<CatBreed>, onCatClick: (CatBreed?) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -107,14 +136,14 @@ fun CatsGrid(
 }
 
 @Composable
-fun CatItem(catBreed: CatBreed, onCatClick: () -> Unit) {
+fun CatItem(catBreed: CatBreed, onCatClick: (CatBreed?) -> Unit) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
             .background(MaterialTheme.colorScheme.onSurfaceVariant)
             .fillMaxWidth()
             .height(150.dp)
-            .clickable { onCatClick() }
+            .clickable { onCatClick(catBreed) }
     ) {
         Column {
             Box(
