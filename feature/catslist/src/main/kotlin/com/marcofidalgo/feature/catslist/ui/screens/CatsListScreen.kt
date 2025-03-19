@@ -98,7 +98,7 @@ fun Header() {
 @Composable
 fun BreedSearchBar() {
     val viewModel = hiltViewModel<CatBreedsViewModel>()
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column {
         var input by remember { mutableStateOf("") }
         TextField(
             value = input,
@@ -114,7 +114,8 @@ fun BreedSearchBar() {
                         awaitFirstDown(pass = PointerEventPass.Initial)
                     }
                 }
-                .padding(vertical = 32.dp)
+                .fillMaxWidth()
+                .padding(vertical = 24.dp)
         )
     }
 }
