@@ -1,12 +1,20 @@
 package com.marcofidalgo.feature.details.ui.screens
 
 import android.graphics.drawable.Drawable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +45,8 @@ import com.marcofidalgo.details.R as LR
 
 @Composable
 fun DetailsScreen(
-    viewModel: DetailsViewModel = hiltViewModel()
+    viewModel: DetailsViewModel = hiltViewModel(),
+    onBackClick: () -> Unit
 ) {
     val breed = viewModel.selectedCatBreed.collectAsState().value
 
@@ -46,7 +56,7 @@ fun DetailsScreen(
             .padding(horizontal = 16.dp, vertical = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Header(breed?.name)
+        HeaderContainer(breed?.name, onBackClick)
         CatImage(breed?.reference_image_id)
         Origin(breed?.origin)
         Temperament(breed?.temperament)
@@ -57,13 +67,46 @@ fun DetailsScreen(
 
 @Composable
 fun Header(breedName: String?) {
+    Box(
+        modifier = Modifier
+            .height(50.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 5.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            modifier = Modifier
+                .wrapContentHeight()
+                .fillMaxWidth(),
+            text = breedName ?: "",
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
 
-    Text(
-        modifier = Modifier,
-        text = breedName ?: "",
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Medium
-    )
+@Composable
+fun HeaderContainer(breedName: String?, onBackClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        Button(
+            contentPadding = PaddingValues(0.dp),
+            colors = ButtonColors(
+                containerColor = MaterialTheme.colorScheme.onPrimary,
+                contentColor = MaterialTheme.colorScheme.onBackground,
+                disabledContainerColor = MaterialTheme.colorScheme.onSurface,
+                disabledContentColor = MaterialTheme.colorScheme.onPrimary
+            ),
+            onClick = onBackClick
+        ) {
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
+        }
+        Header(breedName)
+    }
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -125,6 +168,6 @@ fun Description(description: String?) {
 @Composable
 private fun PreviewDetailsScreen() {
     MaterialTheme() {
-        DetailsScreen()
+        DetailsScreen(onBackClick = {})
     }
 }

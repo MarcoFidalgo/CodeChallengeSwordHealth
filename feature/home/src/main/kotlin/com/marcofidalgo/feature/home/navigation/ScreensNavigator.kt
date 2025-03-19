@@ -14,6 +14,10 @@ class ScreensNavigator {
         parentNavController.navigate(screenRoute)
     }
 
+    fun popBackStack() {
+        parentNavController.popBackStack()
+    }
+
     fun setParentNavController(navController: NavHostController) {
         parentNavController = navController
     }

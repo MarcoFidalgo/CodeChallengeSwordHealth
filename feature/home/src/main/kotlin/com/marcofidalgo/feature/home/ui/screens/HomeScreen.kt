@@ -85,13 +85,16 @@ fun HomeScreenContent(
                 CatsListScreen(onCatClick = {
                     it?.let {
                         detailsViewModel.updateSelectedBreed(it)
-                        parentNavController.navigate(DetailsRoute)
                         screensNavigator.toRoute(DetailsRoute)
                     }
                 })
             }
             composable<BottomTab.Favourites> { FavouritesScreen() }
-            composable<DetailsRoute> { DetailsScreen(detailsViewModel) }
+            composable<DetailsRoute> {
+                DetailsScreen(detailsViewModel, onBackClick = {
+                    screensNavigator.popBackStack()
+                })
+            }
         }
     }
 }
