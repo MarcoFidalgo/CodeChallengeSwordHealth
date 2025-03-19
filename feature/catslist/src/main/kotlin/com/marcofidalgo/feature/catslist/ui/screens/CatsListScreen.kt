@@ -89,7 +89,7 @@ fun CatsListScreen(
 fun Header() {
     Text(
         modifier = Modifier,
-        text = "Cats App",
+        text = stringResource(LR.string.app_name),
         fontSize = 24.sp,
         fontWeight = FontWeight.Medium
     )
